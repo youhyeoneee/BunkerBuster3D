@@ -20,6 +20,12 @@ public class CamTst : MonoBehaviour
      [SerializeField] private Transform planeTr;
      [SerializeField] private Transform desertTr;
 
+     [Header("CamRotation")]
+    public float targetRotation = 30f;
+    public float rotationSpeed = 10f;
+
+    private float currentRotation = 0f;
+
 
     private Transform tr;
     private Vector3 velocity;
@@ -40,7 +46,7 @@ public class CamTst : MonoBehaviour
         tr = GetComponent<Transform>();
         tr.position = new Vector3(5.9f, 188f, -375f);     
         desertTr.position = new Vector3(5.9f, 188f, -375f);           
-        bossTr.position = new Vector3(5.9f, -340f, -392f);
+        bossTr.position = new Vector3(5.9f, -209f, -392f);
         planeTr.position = new Vector3(5.9f, 2240f, -142f);
     }
 
@@ -83,6 +89,20 @@ public class CamTst : MonoBehaviour
                                                 targetPos,
                                                 ref velocity,
                                                 damping);
+                if (currentRotation < targetRotation)
+                {
+                    // Calculate the new rotation
+                    float newRotation = currentRotation + rotationSpeed * Time.deltaTime;
+
+                    // Clamp the rotation to the target rotation
+                    newRotation = Mathf.Clamp(newRotation, 0f, targetRotation);
+
+                    // Apply the new rotation
+                    transform.rotation = Quaternion.Euler(newRotation, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+                    // Update the current rotation
+                    currentRotation = newRotation;
+                }
 
             }else
             {
@@ -96,6 +116,7 @@ public class CamTst : MonoBehaviour
                                                 targetPos,
                                                 ref velocity,
                                                 damping);
+                tr.Rotate(0f, 0f, 0f);
 
             }
            
