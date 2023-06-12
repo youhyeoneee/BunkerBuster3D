@@ -6,13 +6,10 @@ public class Missile : MonoBehaviour
 {
 
 
-    [Header("SwipeContrl")]
-    [SerializeField] private bool   click;
-    [SerializeField] private float  runSpeed;
-    [SerializeField] private float  swipeSpeed;
-    
-    [Space(10)]
-    [SerializeField] private float  missleSpeed;
+    [Header("Control")]
+    [SerializeField] private    float       moveXSpeed          = 50f;
+    [SerializeField] public     float       moveYSpeed          = 18f;
+    private float dragDirection;
 
     [Header("Size")]
     private float maxScale = 30f;
@@ -46,40 +43,19 @@ public class Missile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0))
-        {      
-            click = true;                                                                 
-        }
-        else
+        // 자동으로 떨어지게
+        float moveY = moveYSpeed * Time.fixedDeltaTime;
+        transform.Translate(Vector3.up * moveY);
+
+        if (Input.GetMouseButton(0))
         {
-            click = false;                                  
+            // 마우스 드래그 입력 받기
+            dragDirection = Input.GetAxis("Mouse X");
+
+            // 좌우로 이동
+            float moveX = dragDirection * moveXSpeed * Time.fixedDeltaTime;
+            transform.Translate(Vector3.right * moveX);
         }
-
-        _direction = new Vector3(Mathf.Lerp(_direction.x, Input.GetAxis("Mouse X"), Time.deltaTime * runSpeed), 0f);
-
-        _direction = Vector3.ClampMagnitude(_direction, 1f);
-    }
-
-     void FixedUpdate() 
-    {
-        if (click)
-        {
-            Vector3 displacement = new Vector3(_direction.x, 0f, 0f) * Time.fixedDeltaTime;          
-            rb.velocity = new Vector3(_direction.x * Time.fixedDeltaTime * swipeSpeed, 0f, 0f) + displacement;            
-        }
-        else
-        {                               
-            rb.velocity = Vector3.zero;            
-        }
-
-        MoveDown();
-       
-    }
-
-    void MoveDown()
-    {
-        Vector3 move = new Vector3(0.0f, missleSpeed * Time.fixedDeltaTime, 0.0f);
-        rb.velocity = -move;
     }
 
     public IEnumerator ChangeSize(float amount, bool isVertical)
