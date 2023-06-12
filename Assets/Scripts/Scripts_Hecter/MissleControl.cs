@@ -48,7 +48,7 @@ public class MissleControl : MonoBehaviour
             rb.velocity = Vector3.zero;            
         }
 
-        MoveDown();
+        // MoveDown();
        
     }
 

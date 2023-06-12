@@ -31,6 +31,7 @@ public class CamTst : MonoBehaviour
     [SerializeField] private bool StartPos = false;
     [SerializeField] private bool BossPos = false;
     [SerializeField] private bool PlanePos = false;
+    [SerializeField] private bool PlayerPos1 = false;
 
     
     void Start()
@@ -43,72 +44,66 @@ public class CamTst : MonoBehaviour
         planeTr.position = new Vector3(5.9f, 2240f, -142f);
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
-        // if(GameStart)
-        // {
-        //     if (!targetMove)
-        //     {
-        //         Vector3 targetPos = playerTr.position +
-        //                               -playerTr.forward * distance +
-        //                               playerTr.up * height;
-
-
-        //         tr.position = Vector3.SmoothDamp(tr.position,
-        //                                         targetPos,
-        //                                         ref velocity,
-        //                                         damping);
-
-        //     }
-        //     else
-        //     {
-
-        //         if (time < destTime)
-        //         {
-        //             time += Time.deltaTime;
-        //             t = time / destTime;
-        //         }
-        //         else
-        //         {
-        //             time = destTime;
-        //         }
-        //         tr.position = Vector3.SmoothDamp(tr.position,
-        //                                         targetTr.position,
-        //                                         ref velocity,
-        //                                         damping);
-
-        //         tr.rotation = Quaternion.Slerp(tr.rotation,
-        //                                         targetTr.rotation,
-        //                                         t);
-
-
-        //     }
-        // }
-        
-        
-        BossPosition();
-        PlanePosition();
-        StartPosition();
-        if(Input.GetKeyDown(KeyCode.A))
-        {            
-            BossPos = true;   
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            BossPos = true;
             PlanePos = false;
             StartPos = false;
         }
-        
-        if(Input.GetKeyDown(KeyCode.S))
-        {            
-            BossPos = false;   
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            BossPos = false;
             PlanePos = true;
             StartPos = false;
         }
-        if(Input.GetKeyDown(KeyCode.D))
-        {            
-            BossPos = false;   
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            BossPos = false;
             PlanePos = false;
             StartPos = true;
         }
+    }
+    
+    void LateUpdate()
+    {
+
+        if (!targetMove)
+        {
+            if(PlayerPos1)
+            {
+                distance = -1150f;
+                Vector3 targetPos = playerTr.position +
+                                                 -playerTr.forward * distance +
+                                                 playerTr.up * height;
+
+
+                tr.position = Vector3.SmoothDamp(tr.position,
+                                                targetPos,
+                                                ref velocity,
+                                                damping);
+
+            }else
+            {
+                distance = -100f;
+                Vector3 targetPos = playerTr.position +
+                                                 -playerTr.forward * distance +
+                                                 playerTr.up * height;
+
+
+                tr.position = Vector3.SmoothDamp(tr.position,
+                                                targetPos,
+                                                ref velocity,
+                                                damping);
+
+            }
+           
+        }                                            
+
+        BossPosition();
+        PlanePosition();
+        StartPosition();
     }
 
     void BossPosition()

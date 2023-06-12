@@ -3338,10 +3338,11 @@ MonoBehaviour:
   planeTr: {fileID: 1631040018}
   desertTr: {fileID: 1320171937}
   GameStart: 0
-  targetMove: 0
+  targetMove: 1
   StartPos: 0
   BossPos: 0
   PlanePos: 0
+  PlayerPos1: 0
 --- !u!1001 &965994680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9700,7 +9701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   click: 0
   runSpeed: 5
-  swipeSpeed: 100
+  swipeSpeed: 1000
   MissleSp: 10
 --- !u!54 &4972086036087724118
 Rigidbody:
