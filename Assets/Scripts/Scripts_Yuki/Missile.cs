@@ -44,9 +44,11 @@ public class Missile : MonoBehaviour
 
 
         // 파티클 꺼주기
-        sizeUpParticle.Stop();
-        sizeDownParticle.Stop();
-
+        if (sizeDownParticle != null)
+            sizeUpParticle.Stop();
+        
+        if (sizeDownParticle != null)
+            sizeDownParticle.Stop();
     }
 
     // Update is called once per frame
