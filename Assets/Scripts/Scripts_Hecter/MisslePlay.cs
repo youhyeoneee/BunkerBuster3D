@@ -20,7 +20,7 @@ public class MisslePlay : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            // ani.SetBool("Play", true);
+            ani.SetBool("Play", true);
             StartCoroutine(Fade());
         }
         
@@ -32,7 +32,14 @@ public class MisslePlay : MonoBehaviour
         
     }
 
-    IEnumerator Fade()
+    public void Fall()
+    {
+
+        ani.SetBool("Play", true);
+        StartCoroutine(Fade());
+    }
+
+    private IEnumerator Fade()
     {
         ani.SetBool("Play", true);
         yield return new WaitForSeconds(1.5f);
@@ -40,5 +47,7 @@ public class MisslePlay : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Player.SetActive(true);
         Cam.SetActive(true);
+        ani.SetBool("Play", false);
+        GameManager.instance.StartGame();
     }
 }

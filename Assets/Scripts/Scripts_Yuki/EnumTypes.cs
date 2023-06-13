@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EnumTypes 
 {
-    enum GimmickType
+    public enum GimmickType
     {
         HorizontalSizeUp, // 두께 증가
         HorizontalSizeDown, // 두께 감소
@@ -14,8 +14,16 @@ namespace EnumTypes
         Devolve // 퇴화
     }
 
-    enum TagType
+    public enum TagType
     {
         Player,
+    }
+
+    public enum GameStateType
+    {
+        Intro,
+        Ready,
+        Playing,
+        Finished
     }
 }

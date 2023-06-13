@@ -29,11 +29,13 @@ public class Gimmick : MonoBehaviour
 
     private Missile missile;
     private GimmickManager gimr;
+    private GameManager gmr;
 
     private void Start()
     {
         missile = Missile.instance;
         gimr = GimmickManager.instance;
+        gmr = GameManager.instance;
 
         targetScale = transform.localScale;
         Debug.Log(targetScale);
@@ -50,10 +52,14 @@ public class Gimmick : MonoBehaviour
 			transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
 
 
+        if (gmr.gameState == GameStateType.Playing)
+        {
+            // 자동으로 올라가게
+            float moveY = moveYSpeed * Time.fixedDeltaTime;
+            transform.parent.Translate(Vector3.up * moveY);
+        }
            
-        // 자동으로 올라가게
-        float moveY = moveYSpeed * Time.fixedDeltaTime;
-        transform.parent.Translate(Vector3.up * moveY);
+
 	}
 
 

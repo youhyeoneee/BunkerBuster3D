@@ -25,7 +25,7 @@ namespace HeneGames.Airplane
         private float currentEngineLightIntensity;
         private float currentEngineSoundPitch;
 
-        private bool planeIsDead;
+        private bool planeIsDead = true;
 
         private Rigidbody rb;
         private Runway currentRunway;

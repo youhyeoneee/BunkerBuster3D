@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EnumTypes;
 
 public class Missile : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class Missile : MonoBehaviour
     private MeshRenderer    _mr;
     private Material        _mat;
 
+
+    GameManager gmr;
+
     #region singleton
     public static Missile instance = null;
 
@@ -41,7 +45,7 @@ public class Missile : MonoBehaviour
     {
         _mr = GetComponent<MeshRenderer>();
         _mat = _mr.material;
-
+        gmr = GameManager.instance;
 
         // 파티클 꺼주기
         if (sizeDownParticle != null)
@@ -54,22 +58,26 @@ public class Missile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        // 자동으로 떨어지게
-        float moveY = moveYSpeed * Time.fixedDeltaTime;
-        transform.parent.Translate(Vector3.down * moveY);
 
-        if (rotate)
-			transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
-
-        if (Input.GetMouseButton(0))
+        if (gmr.gameState == GameStateType.Playing)
         {
-            // 마우스 드래그 입력 받기
-            dragDirection = Input.GetAxis("Mouse X");
+        
+            // 자동으로 떨어지게
+            float moveY = moveYSpeed * Time.fixedDeltaTime;
+            transform.parent.Translate(Vector3.down * moveY);
 
-            // 좌우로 이동
-            float moveX = dragDirection * moveXSpeed * Time.fixedDeltaTime;
-            transform.parent.Translate(Vector3.right * moveX, Space.World);
+            if (rotate)
+                transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
+
+            if (Input.GetMouseButton(0))
+            {
+                // 마우스 드래그 입력 받기
+                dragDirection = Input.GetAxis("Mouse X");
+
+                // 좌우로 이동
+                float moveX = dragDirection * moveXSpeed * Time.fixedDeltaTime;
+                transform.parent.Translate(Vector3.right * moveX, Space.World);
+            }
         }
     }
 
