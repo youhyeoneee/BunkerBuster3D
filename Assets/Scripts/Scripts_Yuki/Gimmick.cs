@@ -13,20 +13,47 @@ public class Gimmick : MonoBehaviour
 	[SerializeField] private float          rotationSpeed;
 
 
+    [Header("Control Settings")]
+    [SerializeField] public     float       moveYSpeed          = 18f;
+
+    [Header("Size Settings")]
     [SerializeField] private float          sizeScale = 3f;
+    private float _growthDuration = 0.1f;
+    Vector3 targetScale;
+
+    [Header("Materials")]
+    [SerializeField] private Material redMat;
+    [SerializeField] private Material greenMat;
+
+    
+
     private Missile missile;
+    private GimmickManager gimr;
 
     private void Start()
     {
         missile = Missile.instance;
+        gimr = GimmickManager.instance;
+
+        targetScale = transform.localScale;
+        Debug.Log(targetScale);
     }
 
+    private void OnEnable() 
+    {
+        // StartCoroutine(ChangeSize());
+    }
     private void Update () 
     {
 
 		if (rotate)
 			transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
 
+
+           
+        // 자동으로 올라가게
+        float moveY = moveYSpeed * Time.fixedDeltaTime;
+        transform.parent.Translate(Vector3.up * moveY);
 	}
 
 
@@ -36,6 +63,7 @@ public class Gimmick : MonoBehaviour
 
 		if (triggerObject.tag == TagType.Player.ToString()) {
 			ActivateGimmick();
+            gimr.isnextGimmikActivated = true;
 		}
 	}
 
@@ -43,29 +71,52 @@ public class Gimmick : MonoBehaviour
 	{
 		// if(collectSound)
 		// 	AudioSource.PlayClipAtPoint(collectSound, transform.position);
-		// if(collectEffect)
-		// 	Instantiate(collectEffect, transform.position, Quaternion.identity);
 
         switch (gimmickType)
         {
             case GimmickType.HorizontalSizeUp:
                 StartCoroutine(missile.ChangeSize(sizeScale, false));
+                StartCoroutine(missile.ChangerColor(greenMat));
                 break;
             case GimmickType.HorizontalSizeDown:
                 StartCoroutine(missile.ChangeSize(-sizeScale, false));
+                StartCoroutine(missile.ChangerColor(redMat));
                 break;            
             case GimmickType.VerticalSizeUp:
                 StartCoroutine(missile.ChangeSize(sizeScale, true));
+                StartCoroutine(missile.ChangerColor(greenMat));
                 break;    
             case GimmickType.VerticalSizeDown:
                 StartCoroutine(missile.ChangeSize(-sizeScale, true));
+                StartCoroutine(missile.ChangerColor(redMat));
                 break;   
             case GimmickType.Evolve:
+                StartCoroutine(missile.ChangerColor(greenMat));
                 break;
             case GimmickType.Devolve:
+                StartCoroutine(missile.ChangerColor(redMat));
                 break;
         }
     }
+
+    public IEnumerator ChangeSize()
+    {   
+
+        Debug.Log("Change size" + targetScale);
+        float elapsedTime = 0f;
+        Vector3 startScale = Vector3.zero;
+
+        transform.localScale = startScale;
+
+        while (elapsedTime < _growthDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / _growthDuration);
+            yield return null;
+        }
+
+    }
+
 }
 
 

@@ -376,8 +376,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2547985128512213763}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 53.2, y: 0, z: -86.1}
-  m_LocalScale: {x: 100.00008, y: 100.00008, z: 100}
+  m_LocalPosition: {x: 53.2, y: 0, z: 0}
+  m_LocalScale: {x: 300, y: 300, z: 300}
   m_Children:
   - {fileID: 2547985128325567365}
   m_Father: {fileID: 0}
@@ -544,6 +544,10 @@ MonoBehaviour:
   gimmickType: 4
   rotate: 0
   rotationSpeed: 0
+  moveYSpeed: 50
+  sizeScale: 3
+  redMat: {fileID: 2100000, guid: 9a95d8cf8f4ae4a2fb466274e708cbf8, type: 2}
+  greenMat: {fileID: 2100000, guid: e9c5cdc3e10e446c59dd5f41936e0b3c, type: 2}
 --- !u!65 &772345697
 BoxCollider:
   m_ObjectHideFlags: 0

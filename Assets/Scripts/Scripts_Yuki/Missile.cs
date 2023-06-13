@@ -15,7 +15,13 @@ public class Missile : MonoBehaviour
     [SerializeField] private bool           rotate;
 	[SerializeField] private float          rotationSpeed;
 
-    private float _growthDuration = 0.1f;
+    [Header("Particles")]
+	[SerializeField] private ParticleSystem sizeUpParticle;
+	[SerializeField] private ParticleSystem sizeDownParticle;
+
+    private float           _growthDuration = 0.1f;
+    private MeshRenderer    _mr;
+    private Material        _mat;
 
     #region singleton
     public static Missile instance = null;
@@ -28,12 +34,19 @@ public class Missile : MonoBehaviour
             Destroy(this.gameObject);
         }    
         instance = this;
-        DontDestroyOnLoad(this.gameObject);
     }
     #endregion
 
     void Start()
     {
+        _mr = GetComponent<MeshRenderer>();
+        _mat = _mr.material;
+
+
+        // 파티클 꺼주기
+        sizeUpParticle.Stop();
+        sizeDownParticle.Stop();
+
     }
 
     // Update is called once per frame
@@ -42,7 +55,7 @@ public class Missile : MonoBehaviour
         
         // 자동으로 떨어지게
         float moveY = moveYSpeed * Time.fixedDeltaTime;
-        transform.Translate(Vector3.up * moveY);
+        transform.parent.Translate(Vector3.down * moveY);
 
         if (rotate)
 			transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
@@ -54,12 +67,21 @@ public class Missile : MonoBehaviour
 
             // 좌우로 이동
             float moveX = dragDirection * moveXSpeed * Time.fixedDeltaTime;
-            transform.Translate(Vector3.right * moveX);
+            transform.parent.Translate(Vector3.right * moveX, Space.World);
         }
     }
 
     public IEnumerator ChangeSize(float amount, bool isVertical)
     {
+
+        // 파티클
+        ParticleSystem particle;
+        if (amount > 0)
+            particle = sizeUpParticle;
+        else 
+            particle = sizeDownParticle;
+        particle.Play(); 
+
         float elapsedTime = 0f;
         Vector3 startScale = transform.localScale;        
         Vector3 targetScale;
@@ -72,10 +94,18 @@ public class Missile : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / _growthDuration);
-            Debug.Log(elapsedTime + "ChangeSize " +  transform.localScale);
-            Debug.Log(elapsedTime + "/" + _growthDuration);
-
             yield return null;
         }
+
+        particle.Stop();
     }
+
+    public IEnumerator ChangerColor(Material newMat)
+    {
+        _mr.material = newMat;
+        yield return new WaitForSeconds(0.2f);
+
+        _mr.material = _mat;
+    }
+    
 }
