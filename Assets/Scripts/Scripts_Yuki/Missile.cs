@@ -6,19 +6,16 @@ public class Missile : MonoBehaviour
 {
 
 
-    [Header("Control")]
+    [Header("Control Settings")]
     [SerializeField] private    float       moveXSpeed          = 50f;
     [SerializeField] public     float       moveYSpeed          = 18f;
     private float dragDirection;
 
-    [Header("Size")]
-    private float maxScale = 30f;
-    private float minScale = 10f;
-    [SerializeField] private float _growthDuration = 0.1f;
+    [Header("Rotate Settings")]
+    [SerializeField] private bool           rotate;
+	[SerializeField] private float          rotationSpeed;
 
-    private Rigidbody   rb;
-    private Vector3     _direction; 
-
+    private float _growthDuration = 0.1f;
 
     #region singleton
     public static Missile instance = null;
@@ -37,15 +34,18 @@ public class Missile : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         // 자동으로 떨어지게
         float moveY = moveYSpeed * Time.fixedDeltaTime;
         transform.Translate(Vector3.up * moveY);
+
+        if (rotate)
+			transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
 
         if (Input.GetMouseButton(0))
         {
