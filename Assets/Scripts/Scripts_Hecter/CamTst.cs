@@ -14,13 +14,12 @@ public class CamTst : MonoBehaviour
     private float t;
     [SerializeField] private float destTime = 2.0f;
 
-    [Header("Target Pos")]
-     [SerializeField] private Transform targetTr;
-     [SerializeField] private Transform bossTr;
-     [SerializeField] private Transform planeTr;
-     [SerializeField] private Transform desertTr;
+    [Header("Target Pos")]    
+    [SerializeField] private Transform bossTr;
+    [SerializeField] private Transform planeTr;
+    [SerializeField] private Transform desertTr;
 
-     [Header("CamRotation")]
+    [Header("CamRotation")]
     public float targetRotation = 30f;
     public float rotationSpeed = 10f;
 
@@ -106,7 +105,7 @@ public class CamTst : MonoBehaviour
 
             }else
             {
-                distance = -100f;
+                // distance = -100f;
                 Vector3 targetPos = playerTr.position +
                                                  -playerTr.forward * distance +
                                                  playerTr.up * height;

@@ -7,6 +7,7 @@ public class MissleControl : MonoBehaviour
     [Header("SwipeContrl")]
     [SerializeField] bool click;
     [SerializeField] float runSpeed;
+    [SerializeField] float RotationSpeed;
     [SerializeField] float swipeSpeed;
     
     [Space(10)]
@@ -34,6 +35,8 @@ public class MissleControl : MonoBehaviour
         Direction = new Vector3(Mathf.Lerp(Direction.x, Input.GetAxis("Mouse X"), Time.deltaTime * runSpeed), 0f);
 
         Direction = Vector3.ClampMagnitude(Direction, 1f);
+
+        transform.Rotate(Vector3.up * RotationSpeed * Time.deltaTime);
     }
 
      void FixedUpdate() 
