@@ -8,8 +8,8 @@ public class Missile : MonoBehaviour
 
 
     [Header("Control Settings")]
-    [SerializeField] private    float       moveXSpeed          = 50f;
-    [SerializeField] public     float       moveYSpeed          = 18f;
+    [SerializeField] private    float       moveXSpeed          = 500f;
+    [SerializeField] public     float       moveYSpeed          = 130f;
     private float dragDirection;
 
     [Header("Rotate Settings")]

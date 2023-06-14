@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,12 +52,12 @@ public class Gimmick : MonoBehaviour
 			transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
 
 
-        if (gmr.gameState == GameStateType.Playing)
-        {
-            // 자동으로 올라가게
-            float moveY = moveYSpeed * Time.fixedDeltaTime;
-            transform.parent.Translate(Vector3.up * moveY);
-        }
+        // if (gmr.gameState == GameStateType.Playing)
+        // {
+        //     // 자동으로 올라가게
+        //     float moveY = moveYSpeed * Time.fixedDeltaTime;
+        //     transform.parent.Translate(Vector3.up * moveY);
+        // }
            
 
 	}
@@ -66,42 +67,46 @@ public class Gimmick : MonoBehaviour
 	{
         GameObject triggerObject = other.gameObject;
 
-		if (triggerObject.tag == TagType.Player.ToString()) {
-			ActivateGimmick();
-            gimr.isnextGimmikActivated = true;
-		}
+		// if (triggerObject.tag == TagType.Player.ToString()) {
+		// 	ActivateGimmick();
+  //           Animator anim = triggerObject.GetComponent<Animator>();
+  //
+  //           if (anim != null && gimmickType == GimmickType.Evolve)
+  //           {
+	 //            Debug.Log("Evolve");
+	 //            anim.SetBool(Animtype.Evolve.ToString(), true);
+  //           }
+  //           // gimr.isnextGimmikActivated = true;
+		// }
 	}
 
-    private void ActivateGimmick()
+	private void OnTriggerExit(Collider other)
+	{
+		GameObject triggerObject = other.gameObject;
+
+		// if (triggerObject.tag == TagType.Player.ToString()) {
+		// 	ActivateGimmick();
+		// 	Animator anim = triggerObject.GetComponent<Animator>();
+		//
+		// 	if (anim != null && gimmickType == GimmickType.Evolve)
+		// 	{
+		// 		Debug.Log("Evolve");
+		// 		anim.SetBool(Animtype.Evolve.ToString(), false);
+		// 	}
+		// 	// gimr.isnextGimmikActivated = true;
+		// }
+	}
+
+	private void ActivateGimmick()
 	{
 		// if(collectSound)
 		// 	AudioSource.PlayClipAtPoint(collectSound, transform.position);
 
         switch (gimmickType)
         {
-            case GimmickType.HorizontalSizeUp:
-                StartCoroutine(missile.ChangeSize(sizeScale, false));
-                // StartCoroutine(missile.ChangerColor(greenMat));
-                break;
-            case GimmickType.HorizontalSizeDown:
-                StartCoroutine(missile.ChangeSize(-sizeScale, false));
-                // StartCoroutine(missile.ChangerColor(redMat));
-                break;            
-            case GimmickType.VerticalSizeUp:
-                StartCoroutine(missile.ChangeSize(sizeScale, true));
-                // StartCoroutine(missile.ChangerColor(greenMat));
-                break;    
-            case GimmickType.VerticalSizeDown:
-                StartCoroutine(missile.ChangeSize(-sizeScale, true));
-                // StartCoroutine(missile.ChangerColor(redMat));
-                break;   
             case GimmickType.Evolve:
                 // StartCoroutine(missile.ChangerColor(greenMat));
-                missile.ChangeMissile(1);
-                break;
-            case GimmickType.Devolve:
-                // StartCoroutine(missile.ChangerColor(redMat));
-                missile.ChangeMissile(-1);
+                // StartCoroutine(DrillController.instance.ChangeSize(sizeScale));
                 break;
         }
     }

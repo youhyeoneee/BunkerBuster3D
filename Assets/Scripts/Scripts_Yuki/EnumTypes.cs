@@ -19,6 +19,7 @@ namespace EnumTypes
         Player,
         Walltmp,
         ExplosionObject,
+        Drill,
     }
 
     public enum GameStateType
@@ -34,5 +35,6 @@ namespace EnumTypes
     public enum Animtype
     {
         End,
+        Evolve,
     }
 }
