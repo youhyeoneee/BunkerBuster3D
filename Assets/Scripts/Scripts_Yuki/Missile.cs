@@ -182,16 +182,6 @@ public class Missile : MonoBehaviour
         if(other.gameObject.CompareTag(TagType.Walltmp.ToString()))
         {
             other.transform.parent.GetComponent<ConcritController>().ShatterAllConcrits();
-
-            // 사이즈 줄이기
-
-            if (transform.localScale.y > 0)
-                StartCoroutine(ChangeSize(-0.5f, true));
-            else if (transform.lossyScale.x > 0)
-                StartCoroutine(ChangeSize(-0.5f, false));
-            else if (transform.localScale.y <= 0 && transform.localScale.x <=0)
-                gmr.FinishGame();
-
         }       
     }
 
