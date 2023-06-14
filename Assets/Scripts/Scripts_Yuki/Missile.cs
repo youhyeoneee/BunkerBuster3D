@@ -20,10 +20,13 @@ public class Missile : MonoBehaviour
 	[SerializeField] private ParticleSystem sizeUpParticle;
 	[SerializeField] private ParticleSystem sizeDownParticle;
 
+    [Header("Missiles")]
+    [SerializeField] private GameObject[] missiles;
+    [SerializeField] private int missileIdx = 0;
+
     private float           _growthDuration = 0.1f;
     private MeshRenderer    _mr;
     private Material        _mat;
-
 
     GameManager gmr;
 
@@ -43,8 +46,7 @@ public class Missile : MonoBehaviour
 
     void Start()
     {
-        _mr = GetComponent<MeshRenderer>();
-        _mat = _mr.material;
+        
         gmr = GameManager.instance;
 
         // 파티클 꺼주기
@@ -53,31 +55,52 @@ public class Missile : MonoBehaviour
         
         if (sizeDownParticle != null)
             sizeDownParticle.Stop();
+
+
+         OnOffMissile();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (gmr.gameState == GameStateType.Playing)
+
+        switch(gmr.gameState)
         {
-        
-            // 자동으로 떨어지게
-            float moveY = moveYSpeed * Time.fixedDeltaTime;
-            transform.parent.Translate(Vector3.down * moveY);
+            case GameStateType.Playing:
+                // 자동으로 떨어지게
+                float moveY = moveYSpeed * Time.fixedDeltaTime;
+                transform.parent.Translate(Vector3.down * moveY);
 
-            if (rotate)
-                transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
+                if (rotate)
+                    transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
 
-            if (Input.GetMouseButton(0))
-            {
-                // 마우스 드래그 입력 받기
-                dragDirection = Input.GetAxis("Mouse X");
+                if (Input.GetMouseButton(0))
+                {
+                    // 마우스 드래그 입력 받기
+                    dragDirection = Input.GetAxis("Mouse X");
 
-                // 좌우로 이동
-                float moveX = dragDirection * moveXSpeed * Time.fixedDeltaTime;
-                transform.parent.Translate(Vector3.right * moveX, Space.World);
-            }
+                    // 좌우로 이동
+                    float moveX = dragDirection * moveXSpeed * Time.fixedDeltaTime;
+                    transform.parent.Translate(Vector3.right * moveX, Space.World);
+                }
+                break;
+            case GameStateType.Ending:
+                // 자동으로 떨어지게
+                if (transform.parent.position.y >= 200f)
+                {
+                    moveY = moveYSpeed * Time.fixedDeltaTime;
+                    transform.parent.Translate(Vector3.down * moveY);
+                }
+                else 
+                    transform.parent.position = new Vector3(0f, 0f, -50);
+                break;
+
+            case GameStateType.BreakingCubes:
+                moveY = 5f * Time.fixedDeltaTime;
+                transform.parent.Translate(Vector3.down * moveY);
+                break;
+                
         }
     }
 
@@ -112,10 +135,78 @@ public class Missile : MonoBehaviour
 
     public IEnumerator ChangerColor(Material newMat)
     {
+
+        _mr = missiles[missileIdx].GetComponent<MeshRenderer>();
+        _mat = _mr.material;
+
         _mr.material = newMat;
         yield return new WaitForSeconds(0.2f);
 
         _mr.material = _mat;
     }
     
+    public void ChangeMissile(int increment)
+    {
+
+        if (0 <= missileIdx + increment && missileIdx + increment < missiles.Length)
+            missileIdx += increment;
+        else 
+            Debug.Log("MAX(or MIN) LEVEL");
+        
+        // 파티클
+        ParticleSystem particle;
+        if (increment > 0)
+            particle = sizeUpParticle;
+        else 
+            particle = sizeDownParticle;
+        particle.Play();     
+
+        OnOffMissile();
+    }
+
+
+    private void OnOffMissile()
+    {
+        for (int i=0; i<missiles.Length; i++)
+        {
+            if (i == missileIdx)
+                missiles[i].SetActive(true);
+            else 
+                missiles[i].SetActive(false);
+        }
+    }
+
+
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.CompareTag(TagType.Walltmp.ToString()))
+        {
+            other.transform.parent.GetComponent<ConcritController>().ShatterAllConcrits();
+
+            // 사이즈 줄이기
+
+            if (transform.localScale.y > 0)
+                StartCoroutine(ChangeSize(-0.5f, true));
+            else if (transform.lossyScale.x > 0)
+                StartCoroutine(ChangeSize(-0.5f, false));
+            else if (transform.localScale.y <= 0 && transform.localScale.x <=0)
+                gmr.FinishGame();
+
+        }       
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+
+        if (other.gameObject.CompareTag(TagType.ExplosionObject.ToString()))
+        {
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                // 폭발 효과 적용
+                Vector3 explosionPosition = transform.position;
+                rb.AddExplosionForce(100f, explosionPosition, 100f);
+            }
+        }   
+    }
 }

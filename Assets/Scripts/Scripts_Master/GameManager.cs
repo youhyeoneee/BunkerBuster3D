@@ -51,4 +51,18 @@ public class GameManager : MonoBehaviour
         gameState = GameStateType.Playing;
     }
 
+    public void EndingGame()
+    {
+        gameState = GameStateType.Ending;
+    }
+
+    public void BreakingCube()
+    {
+        gameState = GameStateType.BreakingCubes;
+    }
+    
+    public void FinishGame()
+    {
+        gameState = GameStateType.Finished;
+    }
 }

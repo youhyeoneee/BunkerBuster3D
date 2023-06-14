@@ -38,7 +38,6 @@ public class Gimmick : MonoBehaviour
         gmr = GameManager.instance;
 
         targetScale = transform.localScale;
-        Debug.Log(targetScale);
     }
 
     private void OnEnable() 
@@ -82,25 +81,27 @@ public class Gimmick : MonoBehaviour
         {
             case GimmickType.HorizontalSizeUp:
                 StartCoroutine(missile.ChangeSize(sizeScale, false));
-                StartCoroutine(missile.ChangerColor(greenMat));
+                // StartCoroutine(missile.ChangerColor(greenMat));
                 break;
             case GimmickType.HorizontalSizeDown:
                 StartCoroutine(missile.ChangeSize(-sizeScale, false));
-                StartCoroutine(missile.ChangerColor(redMat));
+                // StartCoroutine(missile.ChangerColor(redMat));
                 break;            
             case GimmickType.VerticalSizeUp:
                 StartCoroutine(missile.ChangeSize(sizeScale, true));
-                StartCoroutine(missile.ChangerColor(greenMat));
+                // StartCoroutine(missile.ChangerColor(greenMat));
                 break;    
             case GimmickType.VerticalSizeDown:
                 StartCoroutine(missile.ChangeSize(-sizeScale, true));
-                StartCoroutine(missile.ChangerColor(redMat));
+                // StartCoroutine(missile.ChangerColor(redMat));
                 break;   
             case GimmickType.Evolve:
-                StartCoroutine(missile.ChangerColor(greenMat));
+                // StartCoroutine(missile.ChangerColor(greenMat));
+                missile.ChangeMissile(1);
                 break;
             case GimmickType.Devolve:
-                StartCoroutine(missile.ChangerColor(redMat));
+                // StartCoroutine(missile.ChangerColor(redMat));
+                missile.ChangeMissile(-1);
                 break;
         }
     }

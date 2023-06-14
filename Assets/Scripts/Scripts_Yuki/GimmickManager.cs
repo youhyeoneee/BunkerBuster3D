@@ -29,6 +29,15 @@ public class GimmickManager : MonoBehaviour
 
     private void Start() 
     {
+
+        // GetChild() 메서드를 사용하여 자식 오브젝트 얻기
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+            gimmicks[i] = child.gameObject;
+        }
+
+
         for(int i=0; i<gimmicks.Length; i++)
         {
             if(i < enableGimmickCnt)

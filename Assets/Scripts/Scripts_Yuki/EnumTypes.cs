@@ -17,6 +17,8 @@ namespace EnumTypes
     public enum TagType
     {
         Player,
+        Walltmp,
+        ExplosionObject,
     }
 
     public enum GameStateType
@@ -24,6 +26,13 @@ namespace EnumTypes
         Intro,
         Ready,
         Playing,
+        Ending,
+        BreakingCubes,
         Finished
+    }
+
+    public enum Animtype
+    {
+        End,
     }
 }

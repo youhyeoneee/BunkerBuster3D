@@ -23,18 +23,18 @@ public class Concrit : MonoBehaviour
         collider.enabled = false;
 
         Vector3 forcePoint = transform.parent.position;
-        float parentXpos = transform.parent.position.x;
-        float xPos = meshRenderer.bounds.center.x;
+        float xPos = transform.localPosition.x;
          
-        Vector3 subdir = (parentXpos - xPos < 0) ? Vector3.right : Vector3.left;
+        Vector3 subdir = (xPos > 0) ? Vector3.right : Vector3.left;
 
+        Debug.Log($"{xPos} : {subdir}");
         Vector3 dir = (Vector3.up * 1.5f + subdir).normalized;
 
         float force = Random.Range(50,100);
         float torque = Random.Range(110,180);
 
         rb.AddForceAtPosition(dir * force, forcePoint, ForceMode.Impulse);
-        rb.AddTorque(Vector3.left * torque);
+        rb.AddTorque(subdir * torque);
         rb.velocity = Vector3.down;
     }
     
@@ -44,7 +44,6 @@ public class Concrit : MonoBehaviour
         {            
             Debug.Log("Player pass the Wall");
         }
-        Debug.Log($"Not Player but {other.gameObject.name}");
     }
 
     

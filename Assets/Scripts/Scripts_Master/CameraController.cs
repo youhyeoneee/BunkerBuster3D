@@ -30,26 +30,43 @@ public class CameraController : MonoBehaviour
 
     private Transform tr;
     private Vector3 velocity;
-
-    [SerializeField] private bool GameStart = false;
     [SerializeField] private bool targetMove = false;
 
     [Header("CamPostion")]
     [SerializeField] private bool PlayerPos1 = false;
 
+    [Header("Cameras")]
+    [SerializeField] private GameObject playerCam;
 
+    [Header("Shake Camera")]
+    [SerializeField] private float shakeRange = 0.05f;
+    private Vector3 cameraPos;
+    bool isShakeStoped = false;
 
-    
     GameManager gm;
-    GameStateType gameState;
     int idx = -1;
+
+
+    #region singleton
+    public static CameraController instance = null;
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(this.gameObject);
+        }    
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
+    #endregion
+
     void Start()
     {   
         
         tr = GetComponent<Transform>();
-        tr.position = new Vector3(5.9f, 188f, -375f);     
-        desertTr.position = new Vector3(5.9f, 188f, -375f);           
-        bossTr.position = new Vector3(5.9f, -209f, -392f);
+        tr.position = new Vector3(0f, 188f, -591.8f);     
+        desertTr.position = new Vector3(0f, 188f, -591.8f);           
+        bossTr.position = new Vector3(0f, -209f, -391.8f);
         planeTr.position = new Vector3(5.9f, 4345f, -142f);
 
         gm = GameManager.instance;  
@@ -57,12 +74,37 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        gameState = gm.gameState;
 
-        if (gm.gameState == GameStateType.Intro && idx == -1)
+        switch(gm.gameState)
         {
-            StartCoroutine(CoCameraFlag());
+            case GameStateType.Intro:
+                if (idx == -1)
+                    StartCoroutine(IntroCamera());
+                break;
+
+            case GameStateType.Playing:
+                idx = 0;
+                break;
+
+            case GameStateType.Ending:
+                playerCam.SetActive(false);
+                break;
+
+            case GameStateType.BreakingCubes:
+
+                if (!isShakeStoped)
+                {
+                    CameraController.instance.StopShake();
+                    isShakeStoped = true;
+                }
+                idx = 1;
+
+                break;
+
+            
         }
+        
+        
        
     }
     
@@ -120,20 +162,20 @@ public class CameraController : MonoBehaviour
             MoveCamera(targetTrs[idx]);
     }
 
-    IEnumerator CoCameraFlag()
+    IEnumerator IntroCamera()
     {
 
         idx++;
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
 
         idx++;
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         
         idx++;
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(4f);
         
         gm.ReadyGame();
     }
@@ -160,6 +202,30 @@ public class CameraController : MonoBehaviour
                                         targetTr.rotation,
                                         t);
         
+    }
+
+    public void ShakeCamera()
+    {   
+        
+        cameraPos = transform.position;
+        InvokeRepeating("StartShake", 0f, 0.005f);
+        
+    }
+
+    void StartShake()
+    {
+        float cameraPosX = Random.value * shakeRange * 2 - shakeRange;
+        float cameraPosY = Random.value * shakeRange * 2 - shakeRange;
+        Vector3 cameraPos = transform.position;
+        cameraPos.x += cameraPosX;
+        cameraPosY += cameraPosY;       
+        transform.position = cameraPos;
+    }
+
+    public void StopShake()
+    {
+        CancelInvoke("StartShake");
+        transform.position = cameraPos;
     }
 }
 

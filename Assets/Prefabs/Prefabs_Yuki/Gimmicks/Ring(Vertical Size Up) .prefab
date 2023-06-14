@@ -298,7 +298,7 @@ MonoBehaviour:
   rotate: 0
   rotationSpeed: 0
   moveYSpeed: 50
-  sizeScale: 5
+  sizeScale: 0.5
   redMat: {fileID: 2100000, guid: 9a95d8cf8f4ae4a2fb466274e708cbf8, type: 2}
   greenMat: {fileID: 2100000, guid: ba8173bb0a0d74225b8421e66599d6b7, type: 2}
 --- !u!65 &354761337

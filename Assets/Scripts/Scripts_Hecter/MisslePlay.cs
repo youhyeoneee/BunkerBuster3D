@@ -42,12 +42,12 @@ public class MisslePlay : MonoBehaviour
     private IEnumerator Fade()
     {
         ani.SetBool("Play", true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
+        ani.SetBool("Play", false);
         fade.SetTrigger("Fade");
         yield return new WaitForSeconds(1f);
-        Player.SetActive(true);
         Cam.SetActive(true);
-        ani.SetBool("Play", false);
+        Player.SetActive(true);
         GameManager.instance.StartGame();
     }
 }
