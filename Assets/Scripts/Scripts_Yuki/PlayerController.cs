@@ -88,6 +88,15 @@ namespace Player {
 
             isReflecting = false;
         }
+
+        public IEnumerator Drilling()
+        {
+            moveYSpeed /= 2;
+            
+            yield return new WaitForSeconds(1f);
+
+            moveYSpeed *= 2;
+        }
     }
 
    

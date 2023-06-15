@@ -37,7 +37,7 @@ public class DrillController : MonoBehaviour
     
     [SerializeField] private int childDriil = 1; // 드릴로 물체를 이어붙일 위치
 
-    public Vector3 offset = new Vector3(0f, 0f, -0.14f);
+    public Vector3 offset = new Vector3(0f, 0f, -0.7f);
     private void Start()
     {
         // GetChild() 메서드를 사용하여 자식 오브젝트 얻기
@@ -46,6 +46,7 @@ public class DrillController : MonoBehaviour
             Transform child = transform.GetChild(i);
             drills.Add(child.gameObject);
         }
+
     }
 
     // Update is called once per frame
@@ -60,7 +61,7 @@ public class DrillController : MonoBehaviour
         target.parent = transform;
         target.localPosition = Vector3.zero + (offset * childDriil);
         target.localRotation = Quaternion.identity;
-        target.localScale = Vector3.one;
+        target.localScale = Vector3.one / 2;
 
         drills.Add(target.gameObject);
         childDriil++;
@@ -89,7 +90,6 @@ public class DrillController : MonoBehaviour
             float randomY = Random.Range(100, 200);       
             float randomZ = Random.Range(-1000, 1000);
             Vector3 force = new Vector3(randomX, randomY, randomZ);
-            Debug.Log(force);
             rb.AddForce(force, ForceMode.Impulse);
 
 

@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 2204439691573984616}
   - component: {fileID: 3051162033476579129}
   - component: {fileID: 1688264450380911314}
-  - component: {fileID: 2134669773616254599}
+  - component: {fileID: 4693956922625885340}
   m_Layer: 0
   m_Name: DrillBitObject
   m_TagString: Drill
@@ -317,7 +317,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2134669773616254599
+--- !u!114 &4693956922625885340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,9 +326,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8076715163712555678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2e6a9dff3ba84198bbd557da32c1ec7, type: 3}
+  m_Script: {fileID: 11500000, guid: 17d158df62d76c94482260cc6205e2b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmickType: 3
-  _isRotate: 0
-  _rotateSpeed: 0

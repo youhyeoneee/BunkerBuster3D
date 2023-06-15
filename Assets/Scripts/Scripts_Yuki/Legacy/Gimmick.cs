@@ -29,13 +29,13 @@ public class Gimmick : MonoBehaviour
     
 
     private Missile missile;
-    private GimmickManager gimr;
+    // private GimmickManager gimr;
     private GameManager gmr;
 
     private void Start()
     {
         missile = Missile.instance;
-        gimr = GimmickManager.instance;
+        // gimr = GimmickManager.instance;
         gmr = GameManager.instance;
 
         targetScale = transform.localScale;

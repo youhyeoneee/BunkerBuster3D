@@ -5,7 +5,9 @@ using EnumTypes;
 
 public class Drill : MonoBehaviour
 {
+    [SerializeField] GameObject particle;
 
+    private float _growthDuration = 0.1f;
     private void OnTriggerEnter(Collider other)
     {
         GameObject triggerObject = other.gameObject;
@@ -15,6 +17,24 @@ public class Drill : MonoBehaviour
         {
             DrillController.instance.AttachObject(transform);
             gameObject.tag = TagType.Player.ToString();
+
+            if (particle != null)
+                particle.SetActive(false);
+        }
+    }
+
+     public IEnumerator ChangeSize()
+    {
+        float elapsedTime = 0f;
+        Vector3 startScale = transform.localScale;        
+        float newSize = transform.localScale.x * 2;
+        Vector3 targetScale = new Vector3(newSize, newSize, startScale.z); 
+
+        while (elapsedTime < _growthDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(startScale, targetScale, elapsedTime / _growthDuration);
+            yield return null;
         }
     }
 }
