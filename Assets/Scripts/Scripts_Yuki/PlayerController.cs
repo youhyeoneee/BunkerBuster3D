@@ -17,15 +17,20 @@ namespace Player {
         [Header("Rotate Settings")]
         [SerializeField] private bool           rotate;
         [SerializeField] private float          rotationSpeed;
-
-
-
+        
 
         [Header("Jump Settings")]
         [SerializeField] private float reflectionForce = 10f; // 튀어오를 힘의 크기
         [SerializeField] private float reflectionDuration = 1f; // 튀어오르는 시간
         private bool isReflecting = false; // 반사 중인지 여부
 
+        [Header("Explosion")]
+        [SerializeField] private GameObject explosionParticle;
+        [SerializeField] private GameObject missile;
+        
+        private bool isExplosed = false;
+
+        private Rigidbody rb;
 
         GameManager gmr;
         #region singleton
@@ -44,13 +49,12 @@ namespace Player {
         void Start()
         {        
             gmr = GameManager.instance;
+            rb = GetComponent<Rigidbody>();
         }
 
-        void Update()
+        void FixedUpdate()
         {
 
-
-            
             if (gmr.gameState != GameStateType.Ready && gmr.gameState != GameStateType.Finished)
             {
 
@@ -64,9 +68,8 @@ namespace Player {
 
                 // 회전 
                 if (rotate)
-                    transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
+                    transform.Rotate (Vector3.up * rotationSpeed * Time.fixedDeltaTime, Space.World);
                 
-
 
                 // 드래그하여 좌우 이동 
                 if (Input.GetMouseButton(0))
@@ -77,6 +80,18 @@ namespace Player {
                     transform.Translate(Vector3.right * moveX, Space.World);
                 }
             }
+            
+            else if (gmr.gameState == GameStateType.Finished)
+            {
+                if (!isExplosed)
+                {
+                    StartCoroutine(Explosion());
+                    isExplosed = true;
+                }
+
+            }
+            
+            
         
         }
 
@@ -98,6 +113,8 @@ namespace Player {
             isReflecting = false;
         }
 
+        
+        // 속도 늦추기 
         public IEnumerator Drilling()
         {
             moveYSpeed /= 2;
@@ -105,6 +122,16 @@ namespace Player {
             yield return new WaitForSeconds(1f);
 
             moveYSpeed *= 2;
+        }
+        
+        public IEnumerator Explosion()
+        {
+            
+            Debug.Log(("Final Explosion"));
+            yield return new WaitForSeconds(2f);
+            
+            explosionParticle.SetActive(true);
+            missile.SetActive(false);
         }
 
     }

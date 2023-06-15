@@ -25,7 +25,6 @@ public class Buncker : MonoBehaviour
 
     IEnumerator Explosion()
     {
-        Debug.Log("Explosion");
         boomParticle.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         GameManager.instance.BreakingCube();

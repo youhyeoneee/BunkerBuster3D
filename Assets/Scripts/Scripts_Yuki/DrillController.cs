@@ -38,6 +38,9 @@ public class DrillController : MonoBehaviour
     [SerializeField] private int childDriil = 1; // 드릴로 물체를 이어붙일 위치
 
     public Vector3 offset = new Vector3(0f, 0f, -0.7f);
+
+
+    private GameManager gmr;
     private void Start()
     {
         // GetChild() 메서드를 사용하여 자식 오브젝트 얻기
@@ -47,12 +50,19 @@ public class DrillController : MonoBehaviour
             drills.Add(child.gameObject);
         }
 
+        gmr = GameManager.instance;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
+
+
+        if (gmr.gameState == GameStateType.BreakingCubes && childDriil == 0)
+        {
+            gmr.FinishGame();
+        }
     }
 
     // 먹는 드릴 기믹 
@@ -71,7 +81,10 @@ public class DrillController : MonoBehaviour
     // 못뚫는 기믹 만났을 때 동작 
     public void RemoveDrill(Transform target)
     {
-        if (drills.Count > 2)
+        
+        // 마지막엔 아무것도 안남게 
+        int remainDrillCnt = (gmr.gameState ==  GameStateType.Playing) ? 2 : 1;
+        if (drills.Count > remainDrillCnt)
         {
             // 드릴이 2개 이상인 경우 날아가면서 제거 
             GameObject removedDrill = drills[drills.Count - 1];
@@ -94,6 +107,7 @@ public class DrillController : MonoBehaviour
 
 
             removedDrill.transform.parent = null;
+            childDriil--;
             // Destroy(removedDrill);
         }
         
