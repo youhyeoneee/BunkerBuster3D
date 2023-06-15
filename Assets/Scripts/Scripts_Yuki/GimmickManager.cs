@@ -30,12 +30,12 @@ public class GimmickManager : MonoBehaviour
     private void Start() 
     {
 
-        // // GetChild() 메서드를 사용하여 자식 오브젝트 얻기
-        // for (int i = 0; i < transform.childCount; i++)
-        // {
-        //     Transform child = transform.GetChild(i);
-        //     gimmicks[i] = child.gameObject;
-        // }
+        // GetChild() 메서드를 사용하여 자식 오브젝트 얻기
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+            gimmicks[i] = child.gameObject;
+        }
 
 
         // for(int i=0; i<gimmicks.Count; i++)
@@ -46,15 +46,15 @@ public class GimmickManager : MonoBehaviour
         //         gimmicks[i].SetActive(false);    
         // }
 
-        // // index = 3;
+        // index = 3;
         // idx = enableGimmickCnt;
     }
 
     // 보이는 기믹을 특정 개수로 유지
     void Update()
     {
-    //     if (isnextGimmikActivated)
-    //         StartCoroutine(EnableNextGimmick());
+        // if (isnextGimmikActivated)
+        //     StartCoroutine(EnableNextGimmick());
     }
 
     IEnumerator EnableNextGimmick()

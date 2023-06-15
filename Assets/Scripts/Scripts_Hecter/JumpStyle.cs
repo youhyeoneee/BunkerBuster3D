@@ -27,10 +27,6 @@ public class JumpStyle : MonoBehaviour
         {
             rb.velocity = new Vector3(0, jumpForce *Time.fixedDeltaTime, 0); 
         }
-        else
-        {
-            rb.velocity = new Vector3(0, moveDown *Time.fixedDeltaTime, 0);
-        }
         
     }
 

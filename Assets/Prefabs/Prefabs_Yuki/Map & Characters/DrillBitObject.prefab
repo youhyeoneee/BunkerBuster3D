@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 3051162033476579129}
   - component: {fileID: 1688264450380911314}
   - component: {fileID: 4693956922625885340}
+  - component: {fileID: 1056842370769242186}
   m_Layer: 0
   m_Name: DrillBitObject
   m_TagString: Drill
@@ -315,7 +316,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!114 &4693956922625885340
 MonoBehaviour:
@@ -329,3 +330,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17d158df62d76c94482260cc6205e2b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particle: {fileID: 0}
+--- !u!114 &1056842370769242186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076715163712555678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea7a44087dd64103bbdbc51a4c4a816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 5000
+  moveDown: -30000
+  jump: 0
+  particle: {fileID: 7102133041285083041, guid: fca8c83807f764cf6999e262ec48ba17, type: 3}
+  particlePos: {fileID: 0}

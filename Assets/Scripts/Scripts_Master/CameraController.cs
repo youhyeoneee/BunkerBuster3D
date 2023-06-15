@@ -87,7 +87,7 @@ public class CameraController : MonoBehaviour
                 break;
 
             case GameStateType.Ending:
-                playerCam.SetActive(false);
+                // playerCam.SetActive(false);
                 break;
 
             case GameStateType.BreakingCubes:
@@ -97,7 +97,7 @@ public class CameraController : MonoBehaviour
                 //     CameraController.instance.StopShake();
                 //     isShakeStoped = true;
                 // }
-                idx = 1;
+                // idx = 1;
 
                 break;
 

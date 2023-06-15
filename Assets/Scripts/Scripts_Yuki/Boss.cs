@@ -16,7 +16,6 @@ public class Boss : MonoBehaviour
 	{
         GameObject triggerObject = other.gameObject;
 
-
 		if (triggerObject.tag == TagType.Player.ToString()) {
             anim.SetTrigger(Animtype.End.ToString());
             GameManager.instance.FinishGame();

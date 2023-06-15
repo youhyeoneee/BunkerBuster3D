@@ -379,11 +379,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e6a9dff3ba84198bbd557da32c1ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmickType: 0
+  gimmickType: 1
   _isRotate: 0
   _rotateSpeed: 0
+  moveYSpeed: 18
   particleSystemPrefab: {fileID: 0}
   evolveCanvas: {fileID: 5013399904775045963}
+  brokenRockPrefab: {fileID: 0}
+  explosionForce: 100
+  explosionRadius: 5
 --- !u!1 &5013399904775045963
 GameObject:
   m_ObjectHideFlags: 0

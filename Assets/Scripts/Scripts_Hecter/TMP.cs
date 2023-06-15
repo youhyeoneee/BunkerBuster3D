@@ -16,7 +16,7 @@ public class TMP : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Walltmp"))
         {

@@ -27,7 +27,7 @@ public class NewGimmick : MonoBehaviour
     public float explosionForce = 100f; // 폭발 힘
     public float explosionRadius = 5f; // 폭발 범위
     MeshRenderer _mr;
-    bool isBroken = false;
+    bool isPassed = false; // 지나갔는지 
 
     DrillController dc;
     Player.PlayerController pc;
@@ -77,7 +77,7 @@ public class NewGimmick : MonoBehaviour
         // if (hitObject.CompareTag(TagType.Player.ToString()))
         // {
         //     ActivateGimmick(hitObject);
-        //     gimr.isnextGimmikActivated = true;
+        //     
         // }
     }
 
@@ -116,10 +116,10 @@ public class NewGimmick : MonoBehaviour
 
             case GimmickType.Drilled:       
 
-                if (!isBroken)  
+                if (!isPassed)  
                 {
                     PlayParticle(other);
-                    isBroken = true;
+                    isPassed = true;
                     // 드릴 뚫느라 조금 느려지기
                     StartCoroutine(pc.Drilling());        
                     _mr.enabled = false;

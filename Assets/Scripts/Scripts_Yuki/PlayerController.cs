@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using EnumTypes;
 
 namespace Player {
 
@@ -26,6 +26,8 @@ namespace Player {
         [SerializeField] private float reflectionDuration = 1f; // 튀어오르는 시간
         private bool isReflecting = false; // 반사 중인지 여부
 
+
+        GameManager gmr;
         #region singleton
         public static PlayerController instance = null;
         private void Awake()
@@ -41,32 +43,39 @@ namespace Player {
 
         void Start()
         {        
+            gmr = GameManager.instance;
         }
 
         void Update()
         {
 
-            // 위아래 이동 
-            if (!isReflecting)
-            {
-                // 아래로 떨어짐 
-                float moveY = moveYSpeed * Time.fixedDeltaTime;
-                transform.Translate(Vector3.down * moveY);
-            }                
 
-            // 회전 
-            if (rotate)
-                transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
             
-
-
-            // 드래그하여 좌우 이동 
-            if (Input.GetMouseButton(0))
+            if (gmr.gameState != GameStateType.Ready && gmr.gameState != GameStateType.Finished)
             {
-                dragDirection = Input.GetAxis("Mouse X");
 
-                float moveX = dragDirection * moveXSpeed * Time.fixedDeltaTime;
-                transform.Translate(Vector3.right * moveX, Space.World);
+                // 위아래 이동 
+                if (!isReflecting)
+                {
+                    // 아래로 떨어짐 
+                    float moveY = moveYSpeed * Time.fixedDeltaTime;
+                    transform.Translate(Vector3.down * moveY);
+                }                
+
+                // 회전 
+                if (rotate)
+                    transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
+                
+
+
+                // 드래그하여 좌우 이동 
+                if (Input.GetMouseButton(0))
+                {
+                    dragDirection = Input.GetAxis("Mouse X");
+
+                    float moveX = dragDirection * moveXSpeed * Time.fixedDeltaTime;
+                    transform.Translate(Vector3.right * moveX, Space.World);
+                }
             }
         
         }
@@ -97,7 +106,9 @@ namespace Player {
 
             moveYSpeed *= 2;
         }
+
     }
+
 
    
 

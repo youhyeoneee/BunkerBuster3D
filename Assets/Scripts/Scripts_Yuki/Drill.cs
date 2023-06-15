@@ -21,9 +21,15 @@ public class Drill : MonoBehaviour
             if (particle != null)
                 particle.SetActive(false);
         }
+
+        if(other.CompareTag("Walltmp"))
+        {
+            other.transform.parent.GetComponent<ConcritController>().ShatterAllConcrits();
+            Debug.Log("Wall is tmp");
+        }
     }
 
-     public IEnumerator ChangeSize()
+    public IEnumerator ChangeSize()
     {
         float elapsedTime = 0f;
         Vector3 startScale = transform.localScale;        
