@@ -5,7 +5,9 @@ using EnumTypes;
 public class Boss : MonoBehaviour
 {
 
-    Animator anim;
+    [SerializeField] Animator anim;
+    [SerializeField] GameObject exploseParticle;
+    [SerializeField] Transform explosePos;
 
     private void Start() 
     {
@@ -16,8 +18,10 @@ public class Boss : MonoBehaviour
 	{
         GameObject triggerObject = other.gameObject;
 
-		if (triggerObject.tag == TagType.Player.ToString()) {
-            // anim.SetTrigger(Animtype.End.ToString());
+		if (triggerObject.tag == TagType.Player.ToString()) 
+        {
+            Instantiate(exploseParticle, explosePos.transform);
+            anim.SetTrigger(Animtype.End.ToString());
             GameManager.instance.FinishGame();
 		}
 	}
