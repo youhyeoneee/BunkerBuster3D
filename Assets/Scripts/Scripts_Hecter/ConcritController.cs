@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConcritController : MonoBehaviour
 {
-    [SerializeField] Concrit[] concrits = null;
+    public List<Concrit> concrits = null;
 
     public void ShatterAllConcrits()
     {
