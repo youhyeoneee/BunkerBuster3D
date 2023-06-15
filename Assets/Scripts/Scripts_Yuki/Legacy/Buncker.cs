@@ -27,7 +27,6 @@ public class Buncker : MonoBehaviour
     {
         Debug.Log("Explosion");
         boomParticle.SetActive(true);
-        CameraController.instance.ShakeCamera();
         yield return new WaitForSeconds(0.5f);
         GameManager.instance.BreakingCube();
         // rb.AddExplosionForce(1000.0f, transform.position, 10.0f, 300.0f);

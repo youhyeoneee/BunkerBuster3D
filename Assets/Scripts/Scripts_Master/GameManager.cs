@@ -6,7 +6,7 @@ using EnumTypes;
 public class GameManager : MonoBehaviour
 {
 
-    public GameStateType gameState = GameStateType.Intro;
+    public GameStateType gameState = GameStateType.Ready;
     [SerializeField] private MisslePlay misslePlay;
 
     #region singleton
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     #endregion
     void Start()
     {
-        gameState = GameStateType.Intro;
+        gameState = GameStateType.Ready;
     }
 
     void Update()

@@ -64,11 +64,11 @@ public class CameraController : MonoBehaviour
     {   
         
         tr = GetComponent<Transform>();
-        tr.position = new Vector3(0f, 188f, -591.8f);     
+        // tr.position = new Vector3(0f, 188f, -591.8f);     
         desertTr.position = new Vector3(0f, 188f, -591.8f);           
         bossTr.position = new Vector3(0f, -209f, -391.8f);
         planeTr.position = new Vector3(5.9f, 4345f, -142f);
-
+        tr.position = planeTr.position;
         gm = GameManager.instance;  
     }
 
@@ -92,11 +92,11 @@ public class CameraController : MonoBehaviour
 
             case GameStateType.BreakingCubes:
 
-                if (!isShakeStoped)
-                {
-                    CameraController.instance.StopShake();
-                    isShakeStoped = true;
-                }
+                // if (!isShakeStoped)
+                // {
+                //     CameraController.instance.StopShake();
+                //     isShakeStoped = true;
+                // }
                 idx = 1;
 
                 break;
@@ -165,15 +165,8 @@ public class CameraController : MonoBehaviour
     IEnumerator IntroCamera()
     {
 
-        idx++;
-
-        yield return new WaitForSeconds(2f);
-
-        idx++;
-
-        yield return new WaitForSeconds(3f);
-        
-        idx++;
+            
+        idx = 2;
 
         yield return new WaitForSeconds(4f);
         
