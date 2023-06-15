@@ -25,7 +25,7 @@ public class Concrit : MonoBehaviour
         Vector3 forcePoint = transform.parent.position;
         float xPos = transform.localPosition.x;
          
-        Vector3 subdir = (xPos > 0) ? Vector3.right : Vector3.left;
+        Vector3 subdir = (xPos > 150) ? Vector3.right : Vector3.left;
 
         Debug.Log($"{xPos} : {subdir}");
         Vector3 dir = (Vector3.up * 1.5f + subdir).normalized;

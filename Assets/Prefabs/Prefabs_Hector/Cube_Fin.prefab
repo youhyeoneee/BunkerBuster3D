@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10821225f5a44e3497ebf305dc10966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePerAxis: 10
+  cubePerAxis: 15
   X: 0
   Y: 0
   Z: 0
