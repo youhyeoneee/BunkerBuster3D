@@ -34,7 +34,7 @@ public class GimmickManager : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             Transform child = transform.GetChild(i);
-            gimmicks[i] = child.gameObject;
+            gimmicks.Add(child.gameObject);
         }
 
 

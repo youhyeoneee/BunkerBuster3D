@@ -22,7 +22,9 @@ public class Drill : MonoBehaviour
                 particle.SetActive(false);
         }
 
-        if(other.CompareTag("Walltmp"))
+
+        // 벽과 부딪혔을 때 
+        if(other.CompareTag(TagType.Walltmp.ToString()))
         {
             other.transform.parent.GetComponent<ConcritController>().ShatterAllConcrits();
             Debug.Log("Wall is tmp");

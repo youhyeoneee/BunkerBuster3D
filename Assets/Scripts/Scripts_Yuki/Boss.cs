@@ -9,7 +9,7 @@ public class Boss : MonoBehaviour
 
     private void Start() 
     {
-        anim = GetComponent<Animator>();   
+        // anim = GetComponent<Animator>();   
     }
 
 	private void OnTriggerEnter(Collider other)
@@ -17,7 +17,7 @@ public class Boss : MonoBehaviour
         GameObject triggerObject = other.gameObject;
 
 		if (triggerObject.tag == TagType.Player.ToString()) {
-            anim.SetTrigger(Animtype.End.ToString());
+            // anim.SetTrigger(Animtype.End.ToString());
             GameManager.instance.FinishGame();
 		}
 	}

@@ -127,7 +127,24 @@ public class NewGimmick : MonoBehaviour
                     GameObject brokenRock = Instantiate(brokenRockPrefab, transform.position, transform.rotation, transform);
                     
                     if (gameObject.activeSelf)
-                    StartCoroutine(SetDisable());
+                        StartCoroutine(SetDisable());
+                }
+                break;
+            case GimmickType.Half:
+                if (!isPassed)  
+                {
+                    PlayParticle(other);
+                    isPassed = true;
+                    // 드릴 퉁기기 
+                    StartCoroutine(pc.ReflectAndBounce());    
+                    dc.RemoveDrill(transform);    
+
+                    _mr.enabled = false;
+                    // 부서진 바위 오브젝트 생성
+                    GameObject brokenRock = Instantiate(brokenRockPrefab, transform.position, transform.rotation, transform);
+                    
+                    if (gameObject.activeSelf)
+                        StartCoroutine(SetDisable());
                 }
                 break;
         }

@@ -17,6 +17,7 @@ namespace EnumTypes
         Evolve, // 진화
         Drilled, // 뚫리는 
         Undrilled, // 안뚫리는 
+        Half,
     }
 
     public enum TagType
