@@ -5,7 +5,8 @@ using EnumTypes;
 
 public class Drill : MonoBehaviour
 {
-    [SerializeField] GameObject particle;
+    [SerializeField] GameObject glowParticle;
+    [SerializeField] GameObject pickParticle;
 
     private float _growthDuration = 0.1f;
     private void OnTriggerEnter(Collider other)
@@ -18,8 +19,9 @@ public class Drill : MonoBehaviour
             DrillController.instance.AttachObject(transform);
             gameObject.tag = TagType.Player.ToString();
 
-            if (particle != null)
-                particle.SetActive(false);
+            if (glowParticle != null)
+                glowParticle.SetActive(false);
+           
         }
 
 

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1811831046714906624}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0.5657077, y: 0, z: 0.5391758}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalScale: {x: 80, y: 20, z: 80}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -109,7 +109,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e6a9dff3ba84198bbd557da32c1ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmickType: 2
+  gimmickType: 3
   _isRotate: 0
   _rotateSpeed: 0
-  particleSystemPrefab: {fileID: 0}
+  moveYSpeed: 18
+  particleSystemPrefab: {fileID: 4735883924423730536, guid: f1d661f14b4c34d58b82604407d02964, type: 3}
+  evolveCanvas: {fileID: 0}
+  brokenRockPrefab: {fileID: 0}
+  explosionForce: 100
+  explosionRadius: 5

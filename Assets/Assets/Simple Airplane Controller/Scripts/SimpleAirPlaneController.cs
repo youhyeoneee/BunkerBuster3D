@@ -67,7 +67,7 @@ namespace HeneGames.Airplane
         [SerializeField] private float rollTurboMultiplier = 1f;
 
         [Header("Moving speed")]
-        [Range(5f, 100f)]
+        [Range(0f, 100f)]
         [SerializeField] private float defaultSpeed = 10f;
 
         [Range(10f, 200f)]
@@ -414,7 +414,7 @@ namespace HeneGames.Airplane
                 //Rotate propellers if any
                 if (propellers.Length > 0)
                 {
-                    RotatePropellers(propellers, 0f);
+                    RotatePropellers(propellers, 20f * propelSpeedMultiplier);
                 }
 
                 //Control lights if any

@@ -13,11 +13,12 @@ namespace EnumTypes
         // Devolve, // 퇴화
 
         // ==========
-        None,
+        Drill, // 먹는 드릴
         Evolve, // 진화
         Drilled, // 뚫리는 
         Undrilled, // 안뚫리는 
         Half,
+        Ending,
     }
 
     public enum TagType
