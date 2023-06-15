@@ -6,12 +6,17 @@ namespace EnumTypes
 {
     public enum GimmickType
     {
-        HorizontalSizeUp, // 두께 증가
-        HorizontalSizeDown, // 두께 감소
-        VerticalSizeUp, // 길이 증가 
-        VerticalSizeDown, // 길이 감소
+        // HorizontalSizeUp, // 두께 증가
+        // HorizontalSizeDown, // 두께 감소
+        // VerticalSizeUp, // 길이 증가 
+        // VerticalSizeDown, // 길이 감소
+        // Devolve, // 퇴화
+
+        // ==========
         Evolve, // 진화
-        Devolve // 퇴화
+        Drilled, // 뚫리는 
+        Undrilled, // 안뚫리는 
+        Drill, // 먹는 드릴
     }
 
     public enum TagType
