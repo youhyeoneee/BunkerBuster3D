@@ -11,7 +11,7 @@ public class CameraController_Yuki : MonoBehaviour
     bool camChange = false;
 
     [Header("CamRotation")]
-    [SerializeField] float targetRotation = 0f;
+    [SerializeField] float targetRotation;
     [SerializeField] float rotationSpeed = 10f;
 
     private float currentRotation;
@@ -20,7 +20,7 @@ public class CameraController_Yuki : MonoBehaviour
     void Start()
     {
         offsetY = transform.position.y - target.transform.position.y;
-        currentRotation = transform.rotation.x;
+        currentRotation = transform.eulerAngles.x;
         Debug.Log($"currentRotation: {currentRotation}");
     }
 
@@ -42,6 +42,12 @@ public class CameraController_Yuki : MonoBehaviour
         {
             camChange = true;
         }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            targetRotation = 0;
+            smoothTime = 4f;
+        }
+        
     }
 
     void ChangeCam()
@@ -50,7 +56,7 @@ public class CameraController_Yuki : MonoBehaviour
         // transform.rotation = targetRotation;
 
         Vector3 newPosition = transform.position;
-        newPosition.z = -600f;
+        newPosition.z = -450f;
         // transform.position = newPosition;
         transform.position = Vector3.SmoothDamp(transform.position,
                                                 newPosition,
