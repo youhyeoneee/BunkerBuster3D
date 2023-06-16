@@ -28,6 +28,7 @@ namespace EnumTypes
         Walltmp,
         ExplosionObject,
         Drill,
+        GemUI,
     }
 
     public enum GameStateType
@@ -35,7 +36,6 @@ namespace EnumTypes
         Intro,
         Ready,
         Playing,
-        Ending,
         BreakingCubes,
         Finished
     }
@@ -44,5 +44,6 @@ namespace EnumTypes
     {
         End,
         Evolve,
+        Open,
     }
 }

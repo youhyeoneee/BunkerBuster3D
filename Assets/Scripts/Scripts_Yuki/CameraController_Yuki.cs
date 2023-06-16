@@ -45,7 +45,6 @@ public class CameraController_Yuki : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O))
         {
             targetRotation = 0;
-            smoothTime = 4f;
         }
         
     }

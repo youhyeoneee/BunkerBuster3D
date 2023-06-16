@@ -86,9 +86,9 @@ public class CameraController : MonoBehaviour
                 idx = 0;
                 break;
 
-            case GameStateType.Ending:
+            // case GameStateType.Ending:
                 // playerCam.SetActive(false);
-                break;
+                // break;
 
             case GameStateType.BreakingCubes:
 

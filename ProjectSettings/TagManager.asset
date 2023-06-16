@@ -8,6 +8,7 @@ TagManager:
   - Walltmp
   - ExplosionObject
   - Drill
+  - GemUI
   layers:
   - Default
   - TransparentFX

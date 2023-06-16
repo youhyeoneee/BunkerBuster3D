@@ -110,6 +110,8 @@ public class DrillController : MonoBehaviour
 
             removedDrill.transform.parent = null;
             childDriil--;
+
+            removedDrill.SetActive(false);
             // Destroy(removedDrill);
         }
         

@@ -35,6 +35,7 @@ public class NewGimmick : MonoBehaviour
     [SerializeField] GameObject brokenRockPrefab;
     MeshRenderer _mr;
     bool isPassed = false; // 지나갔는지 
+    [SerializeField] private ParticleSystem gemParticle;
 
     DrillController dc;
     Player.PlayerController pc;
@@ -152,7 +153,7 @@ public class NewGimmick : MonoBehaviour
                     _mr.enabled = false;
 
                     // 젬 획득 
-                    gmr.gem +=3;
+                    GetGem();
 
                     // 부서진 바위 오브젝트 생성
                     GameObject brokenRock = Instantiate(brokenRockPrefab, transform.position, transform.rotation, transform);
@@ -197,13 +198,30 @@ public class NewGimmick : MonoBehaviour
     {
         drillCntText.text = drillCnt.ToString();
     }
-    // void GetGem()
-    // {
-    //     Vector3 targetScreenPos = Camera.main.WorldToScreenPoint(gem.position);
+    void GetGem()
+    { 
 
-    //     // 이동할 위치에 오프셋을 더한 후, 부드럽게 이동
-    //     Vector3 targetPosition = targetScreenPos + offset;
-    //     gem.position = Vector3.Lerp(gem.position, targetPosition, smoothSpeed * Time.deltaTime);
 
-    // }
+        if (transform.childCount > 0)
+        {
+            // GetChild() 메서드를 사용하여 자식 오브젝트 얻기
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform gem = transform.GetChild(i);
+                Gem gemScirpt = gem.gameObject.GetComponent<Gem>();
+                if (gemScirpt != null)
+                {
+                    Debug.Log("Particle Play");
+                    gemParticle.Play();
+                    gemScirpt.isMove = true;
+                }
+                else 
+                {
+                    Debug.Log("Gem script is null" + gem.gameObject.name);
+
+                }
+            }        
+        }
+        
+    }
 }

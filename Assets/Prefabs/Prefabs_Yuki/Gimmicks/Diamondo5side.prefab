@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8807237025240331831}
   - component: {fileID: 1935607156303806257}
   - component: {fileID: 8629280348394355174}
+  - component: {fileID: 2592406586413522092}
   m_Layer: 0
   m_Name: Diamondo5side
   m_TagString: Untagged
@@ -147,6 +148,21 @@ MonoBehaviour:
   drillCnt: 5
   _blcakCubemr: {fileID: 0}
   brokenRockPrefab: {fileID: 0}
+--- !u!114 &2592406586413522092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8912369191500961223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946e007fd5a984359b1f567f80f7ed8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gemUI: {fileID: 1853589748883739460, guid: abd8cc482dfd0428b8235107616ad7ed, type: 3}
+  moveDuration: 2
+  isMoving: 0
 --- !u!1001 &387982491140098752
 PrefabInstance:
   m_ObjectHideFlags: 0

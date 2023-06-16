@@ -85,16 +85,16 @@ public class Missile : MonoBehaviour
                     transform.parent.Translate(Vector3.right * moveX, Space.World);
                 }
                 break;
-            case GameStateType.Ending:
-                // 자동으로 떨어지게
-                if (transform.parent.position.y >= 200f)
-                {
-                    moveY = moveYSpeed * Time.fixedDeltaTime;
-                    transform.parent.Translate(Vector3.down * moveY);
-                }
-                else 
-                    transform.parent.position = new Vector3(0f, 0f, -50);
-                break;
+            // case GameStateType.Ending:
+            //     // 자동으로 떨어지게
+            //     if (transform.parent.position.y >= 200f)
+            //     {
+            //         moveY = moveYSpeed * Time.fixedDeltaTime;
+            //         transform.parent.Translate(Vector3.down * moveY);
+            //     }
+            //     else 
+            //         transform.parent.position = new Vector3(0f, 0f, -50);
+            //     break;
 
             case GameStateType.BreakingCubes:
                 moveY = 5f * Time.fixedDeltaTime;

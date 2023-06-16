@@ -15,7 +15,7 @@ public class EndTrigger : MonoBehaviour
 	{
 
 		if (other.gameObject.tag == TagType.Player.ToString()) {
-            GameManager.instance.EndingGame();
+            // GameManager.instance.EndingGame();
 		}
 	}
 }

@@ -52,13 +52,14 @@ public class GameManager : MonoBehaviour
         gameState = GameStateType.Playing;
     }
 
-    public void EndingGame()
-    {
-        gameState = GameStateType.Ending;
-    }
+    // public void EndingGame()
+    // {
+    //     gameState = GameStateType.Ending;
+    // }
 
     public void BreakingCube()
     {
+        Debug.Log("Breaking Cube");
         gameState = GameStateType.BreakingCubes;
     }
     
