@@ -147,13 +147,20 @@ public class NewGimmick : MonoBehaviour
                     PlayParticle(other);
                     isPassed = true;
                     // 드릴 뚫느라 조금 느려지기
-                    StartCoroutine(pc.Drilling());        
+                    // StartCoroutine(pc.Drilling());        
+                    
                     _mr.enabled = false;
+
+                    // 젬 획득 
+                    gmr.gem +=3;
+
                     // 부서진 바위 오브젝트 생성
                     GameObject brokenRock = Instantiate(brokenRockPrefab, transform.position, transform.rotation, transform);
                     
                     if (gameObject.activeSelf)
                         StartCoroutine(SetDisable());
+
+                    
                 }
                 break;
         }
@@ -190,4 +197,13 @@ public class NewGimmick : MonoBehaviour
     {
         drillCntText.text = drillCnt.ToString();
     }
+    // void GetGem()
+    // {
+    //     Vector3 targetScreenPos = Camera.main.WorldToScreenPoint(gem.position);
+
+    //     // 이동할 위치에 오프셋을 더한 후, 부드럽게 이동
+    //     Vector3 targetPosition = targetScreenPos + offset;
+    //     gem.position = Vector3.Lerp(gem.position, targetPosition, smoothSpeed * Time.deltaTime);
+
+    // }
 }

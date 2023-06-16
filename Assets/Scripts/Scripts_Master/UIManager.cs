@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using EnumTypes;
 
 public class UIManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject tapText;
     [SerializeField] private GameObject swipeText;
+    [SerializeField] private Text gemText;
 
     GameManager gm;
 
@@ -34,10 +36,14 @@ public class UIManager : MonoBehaviour
         levelText.SetActive(false);
         tapText.SetActive(false);
         swipeText.SetActive(false);
+
+        gemText.text = gm.gem.ToString();
     }
 
     void Update()
     {
+
+        gemText.text = gm.gem.ToString();
 
         switch(gm.gameState)
         {

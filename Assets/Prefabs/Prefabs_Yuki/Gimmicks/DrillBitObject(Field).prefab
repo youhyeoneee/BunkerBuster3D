@@ -333,7 +333,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glowParticle: {fileID: 5681214288486775264}
-  pickParticle: {fileID: 2634214764503908295}
 --- !u!114 &5008271619189496624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e6a9dff3ba84198bbd557da32c1ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmickType: 0
+  gimmickType: 1
   _isRotate: 1
   _rotateSpeed: 100
   moveYSpeed: 18
@@ -19892,10 +19891,5 @@ PrefabInstance:
 --- !u!4 &2764789684303580587 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3257002106791400273, guid: b5343b739900941fa9ccaad66e157484, type: 3}
-  m_PrefabInstance: {fileID: 823511914760134394}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &2634214764503908295 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 3450654404649967933, guid: b5343b739900941fa9ccaad66e157484, type: 3}
   m_PrefabInstance: {fileID: 823511914760134394}
   m_PrefabAsset: {fileID: 0}

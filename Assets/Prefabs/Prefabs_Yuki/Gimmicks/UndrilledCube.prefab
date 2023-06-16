@@ -109,12 +109,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e6a9dff3ba84198bbd557da32c1ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmickType: 3
+  gimmickType: 4
   _isRotate: 0
   _rotateSpeed: 0
   moveYSpeed: 18
   particleSystemPrefab: {fileID: 4735883924423730536, guid: f1d661f14b4c34d58b82604407d02964, type: 3}
   evolveCanvas: {fileID: 0}
+  canvasObject: {fileID: 0}
+  drillCntText: {fileID: 0}
+  drillCnt: 5
+  _blcakCubemr: {fileID: 0}
   brokenRockPrefab: {fileID: 0}
-  explosionForce: 100
-  explosionRadius: 5

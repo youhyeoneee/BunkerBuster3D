@@ -6,6 +6,7 @@ using EnumTypes;
 public class GameManager : MonoBehaviour
 {
 
+    public int gem = 0;
     public GameStateType gameState = GameStateType.Ready;
     [SerializeField] private MisslePlay misslePlay;
 

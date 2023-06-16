@@ -13,6 +13,7 @@ namespace EnumTypes
         // Devolve, // 퇴화
 
         // ==========
+        Gem,
         Drill, // 먹는 드릴
         Evolve, // 진화
         Drilled, // 뚫리는 

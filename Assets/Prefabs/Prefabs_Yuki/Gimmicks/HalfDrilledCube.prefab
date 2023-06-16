@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e6a9dff3ba84198bbd557da32c1ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmickType: 4
+  gimmickType: 5
   _isRotate: 0
   _rotateSpeed: 0
   moveYSpeed: 18

@@ -27,6 +27,10 @@ namespace Player {
         [Header("Explosion")]
         [SerializeField] private GameObject explosionParticle;
         [SerializeField] private GameObject missile;
+
+
+        [SerializeField] private ParticleSystem eatParticle;
+
         
         private bool isExplosed = false;
 
@@ -85,7 +89,7 @@ namespace Player {
             {
                 if (!isExplosed)
                 {
-                    StartCoroutine(Explosion());
+                    Explosion();
                     isExplosed = true;
                 }
 
@@ -124,14 +128,17 @@ namespace Player {
             moveYSpeed *= 2;
         }
         
-        public IEnumerator Explosion()
-        {
-            
-            Debug.Log(("Final Explosion"));
-            yield return new WaitForSeconds(2f);
-            
+        public void Explosion()
+        {            
             explosionParticle.SetActive(true);
             missile.SetActive(false);
+        }
+
+        public void PlayParticle()
+        {
+            // 파티클 시스템 재생
+            eatParticle.Play();
+
         }
 
     }
