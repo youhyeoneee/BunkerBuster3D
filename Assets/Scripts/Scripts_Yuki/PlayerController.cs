@@ -52,7 +52,7 @@ namespace Player {
             rb = GetComponent<Rigidbody>();
         }
 
-        void FixedUpdate()
+        void Update()
         {
 
             if (gmr.gameState != GameStateType.Ready && gmr.gameState != GameStateType.Finished)
@@ -62,13 +62,13 @@ namespace Player {
                 if (!isReflecting)
                 {
                     // 아래로 떨어짐 
-                    float moveY = moveYSpeed * Time.fixedDeltaTime;
+                    float moveY = moveYSpeed * Time.deltaTime;
                     transform.Translate(Vector3.down * moveY);
                 }                
 
                 // 회전 
                 if (rotate)
-                    transform.Rotate (Vector3.up * rotationSpeed * Time.fixedDeltaTime, Space.World);
+                    transform.Rotate (Vector3.up * rotationSpeed * Time.deltaTime, Space.World);
                 
 
                 // 드래그하여 좌우 이동 
@@ -76,7 +76,7 @@ namespace Player {
                 {
                     dragDirection = Input.GetAxis("Mouse X");
 
-                    float moveX = dragDirection * moveXSpeed * Time.fixedDeltaTime;
+                    float moveX = dragDirection * moveXSpeed * Time.deltaTime;
                     transform.Translate(Vector3.right * moveX, Space.World);
                 }
             }

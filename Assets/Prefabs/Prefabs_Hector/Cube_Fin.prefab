@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4653133860514982684}
   - component: {fileID: 4653133860514982685}
   - component: {fileID: 4653133860514982682}
+  - component: {fileID: 5753269327436270654}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -116,6 +117,29 @@ MonoBehaviour:
   Z: 0
   delay: 0
   parent: {fileID: 4653133861026290825}
+--- !u!114 &5753269327436270654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4653133860514982680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e6a9dff3ba84198bbd557da32c1ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gimmickType: 4
+  _isRotate: 0
+  _rotateSpeed: 0
+  moveYSpeed: 18
+  particleSystemPrefab: {fileID: 7776713806991682496, guid: 258e7a07295004e89b99c4177a6e6158, type: 3}
+  evolveCanvas: {fileID: 0}
+  canvasObject: {fileID: 6466923590077038371}
+  drillCntText: {fileID: 0}
+  drillCnt: 2
+  _blcakCubemr: {fileID: 1441488465691722026}
+  brokenRockPrefab: {fileID: 4761051419272268505, guid: 189faceb2f19f42f6a5ee7479b324c68, type: 3}
 --- !u!1 &4653133861026290822
 GameObject:
   m_ObjectHideFlags: 0

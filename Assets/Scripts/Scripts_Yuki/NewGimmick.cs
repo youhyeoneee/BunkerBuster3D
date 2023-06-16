@@ -28,6 +28,8 @@ public class NewGimmick : MonoBehaviour
     [SerializeField] private GameObject canvasObject;
     [SerializeField] private Text drillCntText;
     [SerializeField] private int drillCnt = 5;
+    [SerializeField] private MeshRenderer _blcakCubemr;
+
     
     [Header("Drilled")]
     [SerializeField] GameObject brokenRockPrefab;
@@ -87,15 +89,6 @@ public class NewGimmick : MonoBehaviour
 
         switch (gimmickType)
         {       
-            
-            case GimmickType.Drill:
-                if (!gameObject.CompareTag(TagType.Player.ToString()))
-                {
-                    Debug.Log("Eat Drill");
-                    PlayParticle(other);
-
-                }
-                break;
             case GimmickType.Evolve:
                 isPassed = true;
 
@@ -133,6 +126,10 @@ public class NewGimmick : MonoBehaviour
                 else
                 {
                     _mr.enabled = false;
+
+                    if (_blcakCubemr != null)
+                        _blcakCubemr.enabled = false;
+
                     // 부서진 바위 오브젝트 생성
                     GameObject brokenRock = Instantiate(brokenRockPrefab, transform.position, transform.rotation, transform);
                     

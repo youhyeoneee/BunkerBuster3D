@@ -18,6 +18,8 @@ public class DrillController : MonoBehaviour
     private float reflectionForce = 10f;
     private float removalForce = 5f;
 
+    [SerializeField] GameObject particleSystemPrefab;
+
     private MeshRenderer _mr;
 
     private float           _growthDuration = 0.1f;
@@ -112,4 +114,25 @@ public class DrillController : MonoBehaviour
         }
         
     }
+
+    void PlayParticle(Transform target)
+    {
+        Vector3 triggerPoint;
+        Quaternion triggerRotation;
+        ParticleSystem particleSystem;
+         // 충돌 파티클 
+        triggerPoint = target.transform.position;
+        triggerRotation = target.transform.rotation;       
+
+        // 파티클 시스템 생성 또는 활성화
+        // particleSystem = Instantiate(particleSystemPrefab, triggerPoint, triggerRotation, transform);
+
+        // 파티클 시스템 재생
+        // particleSystem.Play();
+
+        // // 파티클 시스템 재생이 끝난 후 삭제
+        // Destroy(particleSystem.gameObject, particleSystem.main.duration);
+
+    }
+
 }

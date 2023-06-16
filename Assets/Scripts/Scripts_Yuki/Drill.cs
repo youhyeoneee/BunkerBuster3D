@@ -6,9 +6,15 @@ using EnumTypes;
 public class Drill : MonoBehaviour
 {
     [SerializeField] GameObject glowParticle;
-    [SerializeField] GameObject pickParticle;
 
     private float _growthDuration = 0.1f;
+
+    Player.PlayerController pc;
+    private void Start() 
+    {
+        pc = Player.PlayerController.instance;
+
+    }
     private void OnTriggerEnter(Collider other)
     {
         GameObject triggerObject = other.gameObject;
