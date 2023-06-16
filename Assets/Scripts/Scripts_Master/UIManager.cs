@@ -6,11 +6,12 @@ using EnumTypes;
 
 public class UIManager : MonoBehaviour
 {
-
-    [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject tapText;
     [SerializeField] private GameObject swipeText;
     [SerializeField] private Text gemText;
+    [SerializeField] private GameObject main;
+    [SerializeField] private GameObject end;
+
 
     GameManager gm;
 
@@ -32,9 +33,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         gm = GameManager.instance;
-
-        levelText.SetActive(false);
-        tapText.SetActive(false);
         swipeText.SetActive(false);
 
         gemText.text = gm.gem.ToString();
@@ -48,17 +46,19 @@ public class UIManager : MonoBehaviour
         switch(gm.gameState)
         {
             case GameStateType.Ready:
-                if (!levelText.activeSelf)
-                    levelText.SetActive(true);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    main.SetActive(false);
+                    tapText.SetActive(false);
 
-                if (!tapText.activeSelf)
-                    tapText.SetActive(true);
+                }
+            
                 break;
             
             case GameStateType.Playing:
                 if (tapText.activeSelf)
                     tapText.SetActive(false);
-                
+
                 if (!swipeFlag)
                 {
                     StartCoroutine(EnableSwipeText());
@@ -68,6 +68,10 @@ public class UIManager : MonoBehaviour
                 break;
 
 
+            case GameStateType.Finished:
+                if (!end.activeSelf)
+                    end.SetActive(true);
+                break;
         }
     }
 
