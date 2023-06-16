@@ -5,13 +5,23 @@ using UnityEngine;
 public class CameraController_Yuki : MonoBehaviour
 {
     [SerializeField] private GameObject target;
+    [SerializeField] float smoothTime;
+    private Vector3 velocity = Vector3.zero;
     private float offsetY;
     bool camChange = false;
+
+    [Header("CamRotation")]
+    [SerializeField] float targetRotation = 0f;
+    [SerializeField] float rotationSpeed = 10f;
+
+    private float currentRotation;
 
     // Start is called before the first frame update
     void Start()
     {
         offsetY = transform.position.y - target.transform.position.y;
+        currentRotation = transform.rotation.x;
+        Debug.Log($"currentRotation: {currentRotation}");
     }
 
     // LateUpdate is called once per frame, after other updates
@@ -36,11 +46,31 @@ public class CameraController_Yuki : MonoBehaviour
 
     void ChangeCam()
     {
-        Quaternion targetRotation = Quaternion.Euler(0, 0, 0);
-        transform.rotation = targetRotation;
+        // Quaternion targetRotation = Quaternion.Euler(0, 0, 0);
+        // transform.rotation = targetRotation;
 
         Vector3 newPosition = transform.position;
         newPosition.z = -600f;
-        transform.position = newPosition;
+        // transform.position = newPosition;
+        transform.position = Vector3.SmoothDamp(transform.position,
+                                                newPosition,
+                                                ref velocity,
+                                                smoothTime);
+
+        if (currentRotation > targetRotation)
+        {
+            // Calculate the new rotation
+            float newRotation = currentRotation + rotationSpeed * Time.deltaTime;
+
+            // Clamp the rotation to the target rotation
+            newRotation = Mathf.Clamp(newRotation, 0f, targetRotation);
+
+            // Apply the new rotation
+            transform.rotation = Quaternion.Euler(newRotation, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+            // Update the current rotation
+            currentRotation = newRotation;
+        }
+
     }
 }
